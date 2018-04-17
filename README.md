@@ -7,16 +7,16 @@
 * 数据库:MySql
 * Tomcat:Tomcat 7.0
 ## 2.部署项目
-* 1. 新建一个Dynamic Web Project,取名为Fix
-* 2. 复制项目目录下的src、WebContent文件夹内容
-* 3. 粘帖进项目后，打开WebContent->WEB-INF->lib，将里面的所有包右击加进java运行环境中
-* 4. 将项目中的sql 文件导进MySql 中，这里的数据库连接用户名为root，密码为password，新建的数据库名为：bx
-* 5. 在浏览器中打开localhost:8080/Fix,即可访问用户页面
-* 6. 用户名：HZU  密码：111
-* 7. 打开localhost:8080/Fix/adminjsps/login.jsp，即可访问管理员页面
-* 8. 超级管理员账户 用户名：sb@163.com 密码：sbadmin
-* 9. 维修员 张师傅 账户 用户名：zhang@163.com 密码：zh
-* 10.维修员 李师傅 账户 用户名：li@163.com 密码：li
+1. 新建一个Dynamic Web Project,取名为Fix
+2. 复制项目目录下的src、WebContent文件夹内容
+3. 粘帖进项目后，打开WebContent->WEB-INF->lib，将里面的所有包右击加进java运行环境中
+4. 将项目中的sql 文件导进MySql 中，这里的数据库连接用户名为root，密码为password，新建的数据库名为：bx
+5. 在浏览器中打开localhost:8080/Fix,即可访问用户页面
+6. 用户名：HZU  密码：111
+7. 打开localhost:8080/Fix/adminjsps/login.jsp，即可访问管理员页面
+8. 超级管理员账户 用户名：sb@163.com 密码：sbadmin
+9. 维修员 张师傅 账户 用户名：zhang@163.com 密码：zh
+10.维修员 李师傅 账户 用户名：li@163.com 密码：li
 
 # 目前实现的功能有：
 * 1. 用户-管理员 登录及退出
@@ -31,7 +31,7 @@
 
 # 图片展示效果
 用户登录页面
-[![用户登录]](https://github.com/SK-Keith/Fix/blob/master/example/images/1.png)
+![用户登录](https://github.com/SK-Keith/Fix/blob/master/example/images/1.png)
 [用户登录]:https://github.com/SK-Keith/Fix/blob/master/example/images/1.png
 
 
