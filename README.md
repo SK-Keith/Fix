@@ -19,20 +19,45 @@
 10.维修员 李师傅 账户 用户名：li@163.com 密码：li
 
 # 目前实现的功能有：
-* 1. 用户-管理员 登录及退出
-* 2. 用户上传报修表单
-* 3. 用户查看自己的报修表单
-* 4. 用户修改自己的资料
-* 5. 维修员查看未修复、已修复、暂缓修复、超时修复的表单信息，以及对相应表单进行提交完成，撤回已完成操作
-* 5. 管理员查看未修复、已修复、暂缓修复、超时修复的表单信息，以及对相应信息进行修改删除操作
-* 6. 管理员增删管理员、删除用户功能
-* 7. 管理员与维修员通过页面留言墙进行交流功能
-* 8. 管理员与维修员通过评价墙进行查看用户评价
+1. 用户-管理员 登录及退出
+2. 用户上传报修表单
+3. 用户查看自己的报修表单
+4. 用户修改自己的资料
+5. 维修员查看未修复、已修复、暂缓修复、超时修复的表单信息，以及对相应表单进行提交完成，撤回已完成操作
+5. 管理员查看未修复、已修复、暂缓修复、超时修复的表单信息，以及对相应信息进行修改删除操作
+6. 管理员增删管理员、删除用户功能
+7. 管理员与维修员通过页面留言墙进行交流功能
+8. 管理员与维修员通过评价墙进行查看用户评价
+9. 用户报修即时安排相应的师傅
+10.对于超过24小时还未修复的表单，会自动归入超时表单
 
 # 图片展示效果
 用户登录页面
 ![用户登录](https://github.com/SK-Keith/Fix/blob/master/example/images/1.png)
-[用户登录]:https://github.com/SK-Keith/Fix/blob/master/example/images/1.png
+报修页面
+![用户报修](https://github.com/SK-Keith/Fix/blob/master/example/images/2.png)
+用户查看报修单
+![用户查看报单](https://github.com/SK-Keith/Fix/blob/master/example/images/3.png)
+用户修改资料
+![用户修改资料](https://github.com/SK-Keith/Fix/blob/master/example/images/4.png)
+管理员登录页面
+![管理员登录](https://github.com/SK-Keith/Fix/blob/master/example/images/5.png)
+维修员首页
+![管理员首页](https://github.com/SK-Keith/Fix/blob/master/example/images/6.png)
+维修员查看未修复订单
+![管理员未修复](https://github.com/SK-Keith/Fix/blob/master/example/images/7.png)
+维修员修改资料
+![管理员未修复](https://github.com/SK-Keith/Fix/blob/master/example/images/12.png)
+管理员首页
+![管理员未修复](https://github.com/SK-Keith/Fix/blob/master/example/images/13.png)
+管理员查看未修复订单
+![管理员未修复](https://github.com/SK-Keith/Fix/blob/master/example/images/14.png)
+管理员进行用户管理
+![管理员未修复](https://github.com/SK-Keith/Fix/blob/master/example/images/18.png)
+管理员添加维修员
+![管理员未修复](https://github.com/SK-Keith/Fix/blob/master/example/images/20.png)
+
+
 
 
 
