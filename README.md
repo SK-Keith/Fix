@@ -35,9 +35,9 @@
 * 用户登录页面
 ![用户登录](https://github.com/SK-Keith/Fix/blob/master/example/images/1.png)
 * 报修页面
-![用户报修](https://github.com/SK-Keith/Fix/blob/master/example/images/2.png)
+![用户报修](https://github.com/SK-Keith/Fix/blob/master/example/images/21.png)
 * 用户查看报修单
-![用户查看报单](https://github.com/SK-Keith/Fix/blob/master/example/images/3.png)
+![用户查看报单](https://github.com/SK-Keith/Fix/blob/master/example/images/22.png)
 * 用户修改资料
 ![用户修改资料](https://github.com/SK-Keith/Fix/blob/master/example/images/4.png)
 * 管理员登录页面
