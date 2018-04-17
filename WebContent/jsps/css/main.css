@@ -1,0 +1,40 @@
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.element {
+  .center-block();
+}
+.tuichu{
+  float: right!important;
+}
+.navbar-inverse {
+    background-color: #2C4D38;
+    border-color: #2C4D38;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover{
+     background-color: #af8742!important;
+}
+.form-group {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+@media (min-width: 768px){
+.navbar-nav {
+    float: left!important;
+}
+.col-sm-6 {
+    margin:0 auto;
+    float: inherit;
+}
+}
+@media (min-width: 992px){
+.col-md-9 {
+    width: 100%;
+}
+.col-md-6 {
+    margin:0 auto;
+    float: inherit;
+}
+}

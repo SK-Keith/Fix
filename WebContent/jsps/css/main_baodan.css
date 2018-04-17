@@ -1,0 +1,63 @@
+.fa-times {
+        font-size: 15px;
+      }
+      .panel {
+        height: 285px;
+        margin-bottom: 0;
+        margin-top: 10px;
+      }
+      .panel-heading {
+        text-align: right;
+      }
+      /*¼ÓºÅ*/
+      .icon-add-50 {
+        position: relative;
+        box-sizing: border-box;
+        width: 50px;
+        height: 50px;
+        border: 2px dashed #9a9ba3;
+        border-radius: 50%;
+      }
+      .icon-add-50:before {
+        content: '';
+        position: absolute;
+        width: 30px;
+        height: 2px;
+        left: 50%;
+        top: 50%;
+        margin-left: -15px;
+        margin-top: -1px;
+        background-color: #aaabb2;
+      }
+      .icon-add-50:after {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 30px;
+        left: 50%;
+        top: 50%;
+        margin-left: -1px;
+        margin-top: -15px;
+        background-color: #aaabb2;
+      }
+      
+      .updatepanel {
+        border: 1px solid #ccc;
+        text-align: center;
+      }
+      .updatepanel .addbox {
+        vertical-align: middle;
+        height: 285px;
+        line-height: 285px;
+      }
+      
+      #image {
+        overflow: hidden;
+      }
+      .panel-body {
+        /*padding-top: 0px;
+        padding-bottom: 0px;*/
+      }
+      label {
+        width: 100%;
+      }
