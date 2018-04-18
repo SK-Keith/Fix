@@ -1,5 +1,5 @@
 <h2>J2EE校园报修系统</h2>
-=======
+
 # 简介
 这是一个供小白简单入门J2EE的MVC模式实践学习的校园报修系统
 
@@ -59,11 +59,5 @@
 * 管理员添加维修员
 ![管理员未修复](https://github.com/SK-Keith/Fix/blob/master/example/images/20.png)
 
-
-
-
-
-
->>>>>>> e29943deccb5826f64cbc4d68dd69281c7f4af24
 
 
