@@ -2,6 +2,7 @@
 
 # 简介
 这是一个供小白简单入门J2EE的MVC模式实践学习的校园报修系统
+系统展示：http://sk-keith.cn/Fix （前端） http://sk-keith.cn/Fix/adminjsps/login.jsp (后台)
 
 # 快速上手
 ## 1.运行环境
