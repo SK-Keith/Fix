@@ -1,6 +1,6 @@
 <h2>J2EE校园报修系统</h2>
 # 补充说明(2019.08.25更新)
-为了弥补上面点Star的10位老铁，我专门对该项目进行了修改，
+为了弥补上面点Star的9位老铁，我专门对该项目进行了修改，
 	但是整体框架不变，主要修复点罗列如下：
 1. 修改了编码utf-8显示中文问题
 2. 修改了路径jsp:forward 跳转失败问题
@@ -23,15 +23,18 @@
 * 数据库:MySql
 * Tomcat:Tomcat 7.0
 ## 2.部署项目
+### Eclipse部署
 1. 新建一个Dynamic Web Project,取名为Fix
 2. 复制项目目录下的src、WebContent文件夹内容
 3. 粘帖进项目后，打开WebContent->WEB-INF->lib，将里面的所有包右击加进java运行环境中
 4. 将项目中的sql 文件导进MySql 中，这里的数据库连接用户名为root，密码为password，新建的数据库名为：bx
 5. 在浏览器中打开localhost:8080/Fix,即可访问用户页面
-6. 用户名：HZU  密码：111
+6. 用户名：ymx  密码：111
 7. 打开localhost:8080/Fix/adminjsps/login.jsp，即可访问管理员页面
 8. 超级管理员账户 用户名：sb@163.com 密码：sbadmin
 9. 维修员 张师傅 账户 用户名：zhang@163.com 密码：zh  维修员 李师傅 账户 用户名：li@163.com 密码：li
+### IDEA部署
+
 
 # 目前实现的功能有：
 1. 用户-管理员 登录及退出
