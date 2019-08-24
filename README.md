@@ -32,6 +32,35 @@
 8. 超级管理员账户 用户名：sb@163.com 密码：sbadmin
 9. 维修员 张师傅 账户 用户名：zhang@163.com 密码：zh  维修员 李师傅 账户 用户名：li@163.com 密码：li
 ### IDEA部署
+1. 点击File-> Open
+2. 打开窗口，发现project目录不全，这时点击File-> Project Structure
+
+3. 点击左边菜单Project，部署JDK
+
+4. 点击左边菜单Modules，点击左上角的"+"， 选择import Module，选择刚刚解压的项目文件夹，点击"OK"
+
+5. 点击右边横栏菜单，选择source, 将src 目录设为Sources, 将WebContent 设为Resources
+
+6. 点击右边横栏菜单，选择Path,选择第二项，自定义输出class文件路径
+
+7. 点击右边横栏菜单，选择Dependencies，在右边"+" 中添加Library，加入自己安装的tomcat
+
+8. 点击左边菜单，Libraries,点击"+", 选择项目中的Lib中的jar包
+
+9. 点击左边菜单，选择Artifacts,点击"+"，选择第二项，Web Application:explored-》From modules，选中项目即可，同时，在左边菜单中指定输出目录为第六步中部署的自定义class文件路径，最后点击OK
+
+10. 部署tomcat服务器，选择上面菜单中的Run->Edit Configurations，点击"+"，选择"Tomcat Server"-》Local，选择Applicaion Server，选择虚拟机的VM参数-Dfile.encoding=UTF-8(指定为中文)，
+
+11. 点击上面的菜单Deployment，选择右边"+"中的Artifacts，选择刚刚部署的Artifacts，即可。
+
+12. 点击运行tomcat，即可启动项目。
+
+问题：
+1. Error:java:invalid source release: 1.9
+选择Project Structure-》 Sources-》 Language level改为8-Lambda,type annotation etc
+选择Setting-> Build,execution,Deployment->Compiler->Java Compiler-Project bytecode version :1.8(我的是JDK8)
+2. 乱码问题
+项目是由GBK编码写的，所以可以到Setting ->Editor -> File Encodings将项目改为GBK
 
 
 # 目前实现的功能有：
