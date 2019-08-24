@@ -9,27 +9,46 @@ import org.apache.commons.beanutils.converters.DateConverter;
 
 public class CommonUtils {
 	/**
-	 * è¿”å›ä¸€ä¸ªä¸é‡å¤çš„å­—ç¬¦ä¸²
+	 * ·µ»ØÒ»¸ö²»ÖØ¸´µÄ×Ö·û´®
 	 * @return
 	 */
 	public static String uuid() {
 		return UUID.randomUUID().toString().replace("-", "").toUpperCase();
 	}
 
+	public static String[] chars = new String[] { "a", "b", "c", "d", "e", "f",  
+            "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",  
+            "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5",  
+            "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I",  
+            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",  
+            "W", "X", "Y", "Z" };  
+	
+	public static String generateShortUuid() {  
+	    StringBuffer shortBuffer = new StringBuffer();  
+	    String uuid = UUID.randomUUID().toString().replace("-", "");  
+	    for (int i = 0; i < 5; i++) {  
+	        String str = uuid.substring(i * 4, i * 4 + 4);  
+	        int x = Integer.parseInt(str, 16);  
+	        shortBuffer.append(chars[x % 0x3E]);  
+	    }  
+	    return shortBuffer.toString();  
+	  
+	}  
+	
 	/**
-	 * æŠŠmapè½¬æ¢æˆå¯¹è±¡
+	 * °Ñmap×ª»»³É¶ÔÏó
 	 * @param map
 	 * @param clazz
 	 * @return
 	 * 
-	 * æŠŠMapè½¬æ¢æˆæŒ‡å®šç±»å‹
+	 * °ÑMap×ª»»³ÉÖ¸¶¨ÀàĞÍ
 	 */
 	@SuppressWarnings("rawtypes")
 	public static <T> T toBean(Map map, Class<T> clazz) {
 		try {
 			/*
-			 * 1. é€šè¿‡å‚æ•°clazzåˆ›å»ºå®ä¾‹
-			 * 2. ä½¿ç”¨BeanUtils.populateæŠŠmapçš„æ•°æ®å°é—­åˆ°beanä¸­
+			 * 1. Í¨¹ı²ÎÊıclazz´´½¨ÊµÀı
+			 * 2. Ê¹ÓÃBeanUtils.populate°ÑmapµÄÊı¾İ·â±Õµ½beanÖĞ
 			 */
 			T bean = clazz.newInstance();
 			ConvertUtils.register(new DateConverter(), java.util.Date.class);

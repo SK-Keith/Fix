@@ -19,38 +19,38 @@ public class BaseServlet extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");//å¤„ç†å“åº”ç¼–ç 
+		response.setContentType("text/html;charset=UTF-8");//´¦ÀíÏìÓ¦±àÂë
 		
 		/**
-		 * 1. è·å–methodå‚æ•°ï¼Œå®ƒæ˜¯ç”¨æˆ·æƒ³è°ƒç”¨çš„æ–¹æ³• 2. æŠŠæ–¹æ³•åç§°å˜æˆMethodç±»çš„å®ä¾‹å¯¹è±¡ 3. é€šè¿‡invoke()æ¥è°ƒç”¨è¿™ä¸ªæ–¹æ³•
+		 * 1. »ñÈ¡method²ÎÊı£¬ËüÊÇÓÃ»§Ïëµ÷ÓÃµÄ·½·¨ 2. °Ñ·½·¨Ãû³Æ±ä³ÉMethodÀàµÄÊµÀı¶ÔÏó 3. Í¨¹ıinvoke()À´µ÷ÓÃÕâ¸ö·½·¨
 		 */
 		String methodName = request.getParameter("method");
 		Method method = null;
 		/**
-		 * 2. é€šè¿‡æ–¹æ³•åç§°è·å–Methodå¯¹è±¡
+		 * 2. Í¨¹ı·½·¨Ãû³Æ»ñÈ¡Method¶ÔÏó
 		 */
 		try {
 			method = this.getClass().getMethod(methodName,
 					HttpServletRequest.class, HttpServletResponse.class);
 		} catch (Exception e) {
-			throw new RuntimeException("æ‚¨è¦è°ƒç”¨çš„æ–¹æ³•ï¼š" + methodName + "å®ƒä¸å­˜åœ¨ï¼", e);
+			throw new RuntimeException("ÄúÒªµ÷ÓÃµÄ·½·¨£º" + methodName + "Ëü²»´æÔÚ£¡", e);
 		}
 		
 		/**
-		 * 3. é€šè¿‡methodå¯¹è±¡æ¥è°ƒç”¨å®ƒ
+		 * 3. Í¨¹ımethod¶ÔÏóÀ´µ÷ÓÃËü
 		 */
 		try {
 			String result = (String)method.invoke(this, request, response);
-			if(result != null && !result.trim().isEmpty()) {//å¦‚æœè¯·æ±‚å¤„ç†æ–¹æ³•è¿”å›ä¸ä¸ºç©º
-				int index = result.indexOf(":");//è·å–ç¬¬ä¸€ä¸ªå†’å·çš„ä½ç½®
-				if(index == -1) {//å¦‚æœæ²¡æœ‰å†’å·ï¼Œä½¿ç”¨è½¬å‘
+			if(result != null && !result.trim().isEmpty()) {//Èç¹ûÇëÇó´¦Àí·½·¨·µ»Ø²»Îª¿Õ
+				int index = result.indexOf(":");//»ñÈ¡µÚÒ»¸öÃ°ºÅµÄÎ»ÖÃ
+				if(index == -1) {//Èç¹ûÃ»ÓĞÃ°ºÅ£¬Ê¹ÓÃ×ª·¢
 					request.getRequestDispatcher(result).forward(request, response);
-				} else {//å¦‚æœå­˜åœ¨å†’å·
-					String start = result.substring(0, index);//åˆ†å‰²å‡ºå‰ç¼€
-					String path = result.substring(index + 1);//åˆ†å‰²å‡ºè·¯å¾„
-					if(start.equals("f")) {//å‰ç¼€ä¸ºfè¡¨ç¤ºè½¬å‘
+				} else {//Èç¹û´æÔÚÃ°ºÅ
+					String start = result.substring(0, index);//·Ö¸î³öÇ°×º
+					String path = result.substring(index + 1);//·Ö¸î³öÂ·¾¶
+					if(start.equals("f")) {//Ç°×ºÎªf±íÊ¾×ª·¢
 						request.getRequestDispatcher(path).forward(request, response);
-					} else if(start.equals("r")) {//å‰ç¼€ä¸ºrè¡¨ç¤ºé‡å®šå‘
+					} else if(start.equals("r")) {//Ç°×ºÎªr±íÊ¾ÖØ¶¨Ïò
 						response.sendRedirect(request.getContextPath() + path);
 					}
 				}

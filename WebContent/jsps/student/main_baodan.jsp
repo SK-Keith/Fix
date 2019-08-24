@@ -19,14 +19,35 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<style type="text/css">
+	.navbar-inverse {
+    background-color: #009688;
+    border-color: #009688;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    background-color: #4caf50!important;
+}
+</style>
 <title>报修系统</title>
 
 </head>
 <body>
 
-	<img src="<c:url value='/jsps/images/back3.png'/>"
-		class="img-responsive center-block" alt="Responsive image">
+	<!-- header -->
+	<div class="header-nav">
+		<div class="container">
+			<nav class="navbar navbar-default">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<div class="logo" data-wow-delay=".5s">
+						<img  style="float:left;" src="<c:url value='/jsps/images/xy.jpg'/>">
+						<a class="navbar-brand" href="#" >惠州学院报修系统</a>
+					</div>
+				</div>				
+			</nav>
+		</div>
+	</div>
+<!-- //header -->
 
 
 	<div class="container bs-docs-container">
@@ -53,9 +74,13 @@
 						<div class="collapse navbar-collapse"
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
-								<li><a href="<c:url value='/jsps/student/main.jsp'/>">物品报修</a></li>
-								<li class="active"><a href="#">我的报单</a></li>
-								<li><a href="<c:url value='/jsps/student/main_xiugai.jsp'/>">资料修改</a></li>
+								<li><a
+									href="<c:url value='/Users/RangeServlet?method=findRange'/>">物品报修</a></li>
+								<li class="active"><a
+									href="<c:url value='/Users/RecordAddServlet?method=loadTable&uid=${sessionUser.uid }'/>">我的报单</a></li>
+								<li><a
+									href="<c:url value='/Users/FloorServlet?method=findName'/>">资料修改</a></li>
+									<li><a href="<c:url value='/UserServlet?method=exit'/>">注销</a></li>
 							</ul>
 
 						</div>
@@ -67,68 +92,78 @@
 
 				<!--报修名单-->
 				<div class="table-responsive">
-					<table class="table table-bordered">
+					<table class="table table-bordered" style="text-align:center;">
 						<thead>
 							<tr>
-								<th class="active">报单号</th>
-								<th class="success">报修物品</th>
-								<th class="warning">故障时间</th>
-								<th class="danger">维修状态</th>
-								<th class="warning">最后维修时间</th>
-								<th class="success">用户操作</th>
+								<th class="active" style="text-align:center;">编号</th>
+								<th class="danger" style="text-align:center;">故障描述</th>
+								<th class="warning" style="text-align:center;">报修时间</th>
+								<th class="danger" style="text-align:center;">物品状态</th>
+								<th class="success" style="text-align:center;">用户操作</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>Table cell</td>
-								<td>Table cell</td>
-								<td>Table cell</td>
-								<td>Table cell</td>
-								<td><a>评价</a></td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Table cell</td>
-								<td>Table cell</td>
-								<td>Table cell</td>
-								<td>Table cell</td>
-								<td><a>评价</a></td>
-							</tr>
+							<c:forEach items="${pb.beanList }" var="r" varStatus="status"
+										begin="0">
+								<tr>
+									<td>${status.index + 1}</td>
+									<td>${r.details }</td>
+									<td>${r.date1 }</td>
+									<td>
+										<c:choose>
+											<c:when test="${r.status eq 1}">未修复</c:when>
+											<c:when test="${r.status eq 2}">已修复</c:when>
+											<c:when test="${r.status eq 4}">已催修</c:when>
+										</c:choose></td>
+									<td>
+										<span style="margin-right: 40px;"><a href="<c:url value='/Users/RecordAddServlet?method=findAdmin&rid=${r.rid }'/>">详情</a></span>
+										<c:if test="${r.status eq 1 }">
+											<span style="margin-right: 40px;"><a href="<c:url value='/Users/RecordAddServlet?method=cancel&rid=${r.rid }&uid=${sessionUid }'/>">取消</a></span>
+										</c:if>
+										<c:if test="${r.status eq 2 }">
+											<c:if test="${empty r.evaluation}">
+												<span style="margin-right: 40px;"><a href="<c:url value='/Users/RecordAddServlet?method=loadRid&rid=${r.rid }'/>">评价</a></span>
+											</c:if>
+											<c:if test="${not empty r.evaluation}">
+												<span style="margin-right: 40px;"><a href="<c:url value='/Users/RecordAddServlet?method=loadRid&rid=${r.rid }'/>">修改评价</a></span>
+											</c:if>
+										</c:if>
+									</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 				<!-- /.table-responsive -->
 			</div>
-			<nav aria-label="Page navigation">
-			<ul class="pagination">
-				<li><a href="#" aria-label="Previous"> <span
-						aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-			</ul>
-			</nav>
+			<%@include file="/jsps/pager/pager.jsp"%>
 
 
 			<blockquote class="blockquote-reverse"
-				style="background-color: #2C4D38; margin: 0 auto;">
+				style="background-color: #009688; margin: 0 auto;">
 				<p style="color: #fff;">版权所有</p>
-				<footer> <cite title="Source Title">姚棉贤</cite> </footer>
+				<footer> <cite title="Source Title" style="color:#fff">SK-Keith</cite> 
+					<a href="https://github.com/SK-Keith/Fix" style="color:#000;" target="_blank" >点击访问</a> </footer>
 			</blockquote>
 		</div>
 	</div>
 	</div>
-
+</body>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="<c:url value='/jsps/js/jquery.min.js'/>"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="<c:url value='/jsps/js/bootstrap.min.js'/>"></script>
-</body>
+	<script type="text/javascript">
+	$.ajax({
+		async:true,
+		cache:false,
+		url:"/Fix/Users/RecordAddServlet",
+		data:{method:"ajaxJudgeTime"},
+		type:"POST",
+		dataType:"json",
+		success:function(result){
+		}
+	});
+	</script>
 </html>

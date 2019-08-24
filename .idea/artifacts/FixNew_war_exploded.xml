@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="FixNew:war exploded">
+    <output-path>D:/tomcat/apache-tomcat-7.0.79/webapps/ideaOutput/FixNew</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="FixNew" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="FixNew/web/Web" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/WebContent/WEB-INF/lib/jstl-1.2.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/WebContent/WEB-INF/web.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/WebContent/jsps/css/main_baodan.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/c3p0-config.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Admin/admin/dao/AdminDao.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Admin/admin/domain/Admin.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Admin/admin/service/AdminService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Admin/admin/web/servlet/AdminServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Admin/chat/dao/ChatDao.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Admin/chat/domain/Chat.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Admin/chat/service/ChatService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Admin/chat/web/servlet/ChatServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Admin/record/web/servlet/RecordServlet1.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Admin/worker/web/servlet/WorkerServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/JudgeUid/judgeUid.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/filter/LoginFilter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/floor/dao/FloorDao.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/floor/domain/Floor.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/floor/service/FloorService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/floor/web/servlet/FloorServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/range/dao/RangeDao.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/range/domain/Range.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/range/service/RangeService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/range/web/servlet/RangeServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/record/dao/RecordDao.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/record/domain/Record.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/record/service/RecordService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/record/web/servlet/RecordAddServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/Users/record/web/servlet/RecordServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/base/BaseServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/filter/EncodingFilter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/filter/GetRequest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/jdbc/JdbcUtils.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/jdbc/TxQueryRunner.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/pager/Expression.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/pager/PageBean.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/pager/PageConstants.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/time/getNextDay.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/time/getTimeFormatText.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/tool/CommonUtils.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/user/dao/UserDao.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/user/domain/User.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/user/service/UserService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/user/web/servlet/UserServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/vcode/VerifyCode.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/cn/BX/vcode/VerifyCodeServlet.java" charset="GBK" />
+  </component>
+</project>

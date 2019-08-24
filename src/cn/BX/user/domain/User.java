@@ -1,16 +1,30 @@
 package cn.BX.user.domain;
 
+import cn.BX.Users.floor.domain.Floor;
+
 public class User {
-	// å¯¹åº”æ•°æ®åº“çš„è¡¨
+	// ¶ÔÓ¦Êı¾İ¿âµÄ±í
 	private String uid;
 	private String loginname;
 	private String loginpass;
-	private String uname;//ç”¨æˆ·å§“å
-	private String sex;//æ€§åˆ«
-	private String fname;//æ‰€åœ¨æ¥¼å®‡
-	private String address;// å®¿èˆå·
-	private int phone;//ç”µè¯
-	private String email;//é‚®ç®±
+	private String uname;// ÓÃ»§ĞÕÃû
+	private String sex;// ĞÔ±ğ
+	private String fname;// Â¥¶°
+	private String number;// ±¨ĞŞÊıÁ¿
+	private Floor floor;// ËùÔÚÂ¥Óî
+	private String address;
+	private String addfname;//Â¥¶°+¾ßÌåµØÖ·£¬Èç22¶°a425
+	private String phone;// µç»°
+	private String email;// ÓÊÏä
+	private String verifyCode;// ÑéÖ¤Âë
+
+	public String getAddfname() {
+		return addfname;
+	}
+
+	public void setAddfname(String addfname) {
+		this.addfname = addfname;
+	}
 
 	public String getFname() {
 		return fname;
@@ -20,7 +34,29 @@ public class User {
 		this.fname = fname;
 	}
 
-	private String verifyCode;// éªŒè¯ç 
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getVerifyCode() {
+		return verifyCode;
+	}
+
+	public void setVerifyCode(String verifyCode) {
+		this.verifyCode = verifyCode;
+	}
 
 	public String getUid() {
 		return uid;
@@ -62,19 +98,19 @@ public class User {
 		this.sex = sex;
 	}
 
-	public String getAddress() {
-		return address;
+	public Floor getFloor() {
+		return floor;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setFloor(Floor floor) {
+		this.floor = floor;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -86,19 +122,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getVerifyCode() {
-		return verifyCode;
-	}
-
-	public void setVerifyCode(String verifyCode) {
-		this.verifyCode = verifyCode;
-	}
-
 	@Override
 	public String toString() {
 		return "User [uid=" + uid + ", loginname=" + loginname + ", loginpass=" + loginpass + ", uname=" + uname
-				+ ", sex=" + sex + ", fname=" + fname + ", address=" + address + ", phone=" + phone + ", email=" + email
-				+ ", verifyCode=" + verifyCode + "]";
+				+ ", sex=" + sex + ", fname=" + fname + ", number=" + number + ", floor=" + floor + ", address="
+				+ address + ", phone=" + phone + ", email=" + email + ", verifyCode=" + verifyCode + "]";
 	}
 
 }

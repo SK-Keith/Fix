@@ -1,94 +1,243 @@
 package cn.BX.user.web.servlet;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-	
+
 import cn.BX.base.BaseServlet;
+import cn.BX.Users.floor.domain.Floor;
 import cn.BX.tool.CommonUtils;
 import cn.BX.user.domain.User;
 import cn.BX.user.service.UserService;
 
+@WebServlet("/UserServlet")
 public class UserServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	private UserService userService = new UserService();
 
+	private UserService userService = new UserService();
+	/**
+	 * µÇÂ¼¹¦ÄÜ
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws IOException
+	 */
 	public String login(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		/*
-		 * 1.å°è£…è¡¨å•æ•°æ®åˆ°User 
-		 * 2.æ ¡éªŒè¡¨å•æ•°æ® 
-		 * 3.ä½¿ç”¨serviceæŸ¥è¯¢ï¼Œå¾—åˆ°User 
-		 * 4.æŸ¥çœ‹ç”¨æˆ·æ˜¯å¦å­˜åœ¨ï¼Œå¦‚æœä¸å­˜åœ¨ *
-		 * ä¿å­˜é”™è¯¯ä¿¡æ¯ï¼Œç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ * ä¿å­˜ç”¨æˆ·æ•°æ®ï¼Œä¸ºäº†å›æ˜¾ * è½¬å‘åˆ°login.jsp 
-		 * 5.å¦‚æœå­˜åœ¨ï¼ŒæŸ¥çœ‹çŠ¶æ€ï¼Œå¦‚æœçŠ¶æ€ä¸ºfalse:
-		 * * ä¿å­˜é”™è¯¯ä¿¡æ¯ï¼Œæ‚¨æ²¡æœ‰æ¿€æ´» 
-		 * * ä¿å­˜ç”¨æˆ·æ•°æ®ï¼Œä¸ºäº†å›æ˜¾ 
-		 * * ä¿å­˜æ–°é—»ä¿¡æ¯ï¼Œæ˜¾ç¤ºåœ¨å·²ç™»å½•ç•Œé¢ 
-		 * * ä¿å­˜å…¬å‘Šä¿¡æ¯ï¼Œæ˜¾ç¤ºåœ¨å·²ç™»å½•ç•Œé¢ * 
-		 * 	  è½¬å‘åˆ°login.jsp 
-		 * 6.ç™»å½•æˆåŠŸ * ä¿å­˜å½“å‰æŸ¥è¯¢å‡ºçš„useråˆ°sessionä¸­ 
-		 * *
-		 * ä¿å­˜å½“å‰ç”¨æˆ·çš„åç§°åˆ°cookieä¸­ï¼Œæ³¨æ„ä¸­æ–‡éœ€è¦ç¼–ç å¤„ç†
+		 * 1.·â×°±íµ¥Êı¾İµ½User 
+		 * 5.Èç¹û´æÔÚ£¬²é¿´×´Ì¬£¬Èç¹û×´Ì¬Îªfalse:
+		 * 	* ±£´æ´íÎóĞÅÏ¢£¬ÄúÃ»ÓĞ¼¤»î * ±£´æÓÃ»§Êı¾İ£¬ÎªÁË»ØÏÔ
+		 *  * ±£´æĞÂÎÅĞÅÏ¢£¬ÏÔÊ¾ÔÚÒÑµÇÂ¼½çÃæ * ±£´æ¹«¸æĞÅÏ¢£¬ÏÔÊ¾ÔÚÒÑµÇÂ¼½çÃæ *
+		 * 		×ª·¢µ½login.jsp 
+		 * 6.µÇÂ¼³É¹¦ * ±£´æµ±Ç°²éÑ¯³öµÄuserµ½sessionÖĞ *
+		 * ±£´æµ±Ç°ÓÃ»§µÄÃû³Æµ½cookieÖĞ£¬×¢ÒâÖĞÎÄĞèÒª±àÂë´¦Àí
 		 */
 		/*
-		 * 1.å°è£…è¡¨å•æ•°æ®åˆ°user
+		 * 1.·â×°±íµ¥Êı¾İµ½user
 		 */
 		User formUser = CommonUtils.toBean(req.getParameterMap(), User.class);
 		/*
-		 * 2.æ ¡éªŒ
+		 * 2.Ğ£Ñé
 		 */
-		Map<String, String> errors = validateLogin(formUser, req.getSession());
-		if (errors.size() > 0) {
-			req.setAttribute("form", formUser);
-			req.setAttribute("errors", errors);
-			return "f:/jsps/user/login.jsp";
-		}
+		// Map<String, String> errors = validateLogin(formUser,
+		// req.getSession());
+		// if (errors.size() > 0) {
+		// req.setAttribute("form", formUser);
+		// req.setAttribute("errors", errors);
+		// return "f:/jsps/user/login.jsp";
+		// }
 		/*
-		 * 3.è°ƒç”¨userService#login()æ–¹æ³•
+		 * 3.µ÷ÓÃuserService#login()·½·¨
 		 */
 		User user = userService.login(formUser);
 		/*
-		 * 4.å¼€å§‹åˆ¤æ–­
+		 * 4.¿ªÊ¼ÅĞ¶Ï
 		 */
-		if (user == null) {
-			req.setAttribute("msg", "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ï¼");
+		if (user.getLoginname() == null || user.getLoginpass() == null) {
+			req.setAttribute("msg", "ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
 			req.setAttribute("user", formUser);
 			return "f:/jsps/user/login.jsp";
-		} else {
-				// ä¿å­˜ç”¨æˆ·åˆ°session
-				req.setAttribute("username", user.getLoginname());
-				req.getSession().setAttribute("sessionUser", user);
-
-				//æŠŠæŠ¥ä¿®ç±»å‹å’ŒæŠ¥ä¿®èŒƒå›´æäº¤åˆ°é¦–é¡µ
-				
-				
-				// è·å–ç”¨æˆ·åä¿å­˜åˆ°cookieä¸­
-				String loginname = user.getLoginname();
-				loginname = URLEncoder.encode(loginname, "utf-8");
-				Cookie cookie = new Cookie("loginname", loginname);
-				cookie.setMaxAge(60 * 60 * 24 * 10);// ä¿å­˜10å¤©
-				resp.addCookie(cookie);
-				return "f:/jsps/student/main.jsp";
-			
+		} else { 
+			// ±£´æÓÃ»§µ½session
+			req.getSession().setAttribute("sessionUser", user);
+			req.getSession().setAttribute("sessionUid", user.getUid());
+			req.getSession().setAttribute("sessionUname", user.getUname());
+			req.getSession().setAttribute("sessionPhone", user.getPhone());
+			req.getSession().setAttribute("sessionEmail", user.getEmail());
+//			req.getSession().setAttribute("sessionFname", user.getFloor().getFname());
+			req.getSession().setAttribute("sessionAddress", user.getAddress());
+			// »ñÈ¡ÓÃ»§Ãû±£´æµ½cookieÖĞ
+			String loginname = user.getLoginname();
+			loginname = URLEncoder.encode(loginname, "utf-8");
+			Cookie cookie = new Cookie("loginname", loginname);
+			cookie.setMaxAge(60 * 60 * 24 * 10);// ±£´æ10Ìì
+			resp.addCookie(cookie);
+			if(user.getUname() == null || user.getPhone() == null || user.getEmail() == null
+					|| user.getAddress() == null){
+				return "f:/jsps/student/index.jsp";
+			}else{
+				return "f:/jsps/student/index2.jsp";
+			}
 		}
 	}
 
-	private Map<String, String> validateLogin(User formUser, HttpSession session) {
-		Map<String, String> errors = new HashMap<String, String>();
-		String verifyCode = formUser.getVerifyCode();
-		String vcode = (String) session.getAttribute("vCode");
-		if (verifyCode == null || verifyCode.trim().isEmpty()) {
-			errors.put("verifyCode", "éªŒè¯ç ä¸èƒ½ä¸ºç©º");
-		} else if (!verifyCode.equalsIgnoreCase(vcode)) {
-			errors.put("verifyCode", "éªŒè¯ç é”™è¯¯");
-		}
-		return errors;
+	/**
+	 * ±à¼­¸öÈËĞÅÏ¢
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws IOException
+	 */
+	public String edit(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		req.setCharacterEncoding("utf-8");
+		resp.setContentType("text/html;charset=utf-8");
+		Map map = req.getParameterMap();
+		User user = CommonUtils.toBean(map, User.class);
+		Floor floor = CommonUtils.toBean(map, Floor.class);
+		floor.setFid(CommonUtils.uuid());
+		user.setFloor(floor);
+
+		userService.edit(user);
+		req.getSession().setAttribute("sessionUser", user);
+		req.getSession().setAttribute("sessionUname", user.getUname());
+		req.getSession().setAttribute("sessionPhone", user.getPhone());
+		req.getSession().setAttribute("sessionEmail", user.getEmail());
+//		req.getSession().setAttribute("sessionFname", user.getFloor().getFname());
+		req.getSession().setAttribute("sessionAddress", user.getAddress());
+		req.setAttribute("msg", "ĞÅÏ¢Ìí¼Ó³É¹¦");
+		return "f:/jsps/msg.jsp";
 	}
 
+	/**
+	 * Ò³Ãæ×Ô¶¯ÅĞ¶ÏÓÃ»§ÃûÊÇ·ñ´æÔÚ
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public String ajaxValidateUname(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		/*
+		 * 1.»ñÈ¡ÓÃ»§Ãû
+		 */
+		String uname = req.getParameter("uname");
+		/*
+		 * 2.Í¨¹ıserviceµÃµ½Ğ£Ñé½á¹û
+		 */
+		boolean b = userService.ajaxValidateLoginname(uname);
+		/*
+		 * 3.·µ»Ø¿Í»§¶Ë
+		 */
+		resp.getWriter().print(b);
+		
+		return null;
+	}
+	
+	/**
+	 * ajax EmailÊÇ·ñ×¢²áĞ£Ñé
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public String ajaxValidateEmail(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		/*
+		 * 1.»ñÈ¡Email
+		 */
+		String email = req.getParameter("email");
+		/*
+		 * 2.Í¨¹ıserviceµÃµ½Ğ£Ñé½á¹û
+		 */
+		boolean b = userService.ajaxValidateEmail(email);
+		/*
+		 * 3.·µ»Ø¿Í»§¶Ë
+		 */
+		resp.getWriter().print(b);
+		return null;
+	}
+	
+	/**
+	 * ajax EmailÊÇ·ñ×¢²áĞ£Ñé
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public String ajaxValidatePhone(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		/*
+		 * 1.»ñÈ¡Email
+		 */
+		String phone = req.getParameter("phone");
+		/*
+		 * 2.Í¨¹ıserviceµÃµ½Ğ£Ñé½á¹û
+		 */
+		boolean b = userService.ajaxValidatePhone(phone);
+		/*
+		 * 3.·µ»Ø¿Í»§¶Ë
+		 */
+		resp.getWriter().print(b);
+		return null;
+	}
+	
+	/**
+	 * ¼ÓÔØËùÓĞµÄÓÃ»§
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
+	public String loadAllUser(HttpServletRequest req, HttpServletResponse resp){
+		List<User> userList = userService.loadAllUser();
+		req.setAttribute("userList", userList);
+		return "f:/adminjsps/admin/table5.jsp";
+	}
+	
+	/**
+	 * ×¢²á¹¦ÄÜ
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
+	public String register(HttpServletRequest req, HttpServletResponse resp) {
+		String username = req.getParameter("loginname");
+		boolean b = userService.findByUsername(username);
+		if(b) {
+			String uid = CommonUtils.uuid();
+			String loginpass = req.getParameter("loginpass");
+			User u = new User();
+			u.setUid(uid);
+			u.setLoginname(username);
+			u.setLoginpass(loginpass);
+			userService.createUser(u);
+			return "f:/jsps/user/message_s.jsp";
+		}else {
+			return "f:/jsps/user/message_f.jsp";
+		}
+	}
+	
+	/**
+	 * ÍË³ö¹¦ÄÜ
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
+	public String exit(HttpServletRequest req, HttpServletResponse resp){
+		req.getSession().invalidate();
+		return "r:/jsps/user/login.jsp";
+	}
+	
 }

@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/VerifyCodeServlet")
 public class VerifyCodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+       
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		VerifyCode vc = new VerifyCode();
-		BufferedImage image = vc.getImage();//è·å–ä¸€æ¬¡æ€§éªŒè¯ç å›¾ç‰‡
-		// è¯¥æ–¹æ³•å¿…é¡»åœ¨getImage()æ–¹æ³•ä¹‹åæ¥è°ƒç”¨
-//		System.out.println(vc.getText());//è·å–å›¾ç‰‡ä¸Šçš„æ–‡æœ¬
-		VerifyCode.output(image, response.getOutputStream());//æŠŠå›¾ç‰‡å†™åˆ°æŒ‡å®šæµä¸­
+		BufferedImage image = vc.getImage();//»ñÈ¡Ò»´ÎĞÔÑéÖ¤ÂëÍ¼Æ¬
+		// ¸Ã·½·¨±ØĞëÔÚgetImage()·½·¨Ö®ºóÀ´µ÷ÓÃ
+//		System.out.println(vc.getText());//»ñÈ¡Í¼Æ¬ÉÏµÄÎÄ±¾
+		VerifyCode.output(image, response.getOutputStream());//°ÑÍ¼Æ¬Ğ´µ½Ö¸¶¨Á÷ÖĞ
 		
-		// æŠŠæ–‡æœ¬ä¿å­˜åˆ°sessionä¸­ï¼Œä¸ºLoginServletéªŒè¯åšå‡†å¤‡
+		// °ÑÎÄ±¾±£´æµ½sessionÖĞ£¬ÎªLoginServletÑéÖ¤×ö×¼±¸
 		request.getSession().setAttribute("vCode", vc.getText());
 	}
 

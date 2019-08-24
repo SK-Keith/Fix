@@ -20,6 +20,44 @@
     margin-bottom: 15px;
     margin-top: 15px;
 }
+.navbar-inverse {
+    background-color: #009688;
+    border-color: #009688;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    background-color: #4caf50!important;
+}
+.navbar-inverse .navbar-toggle {
+    border-color: #efefef!important;
+}
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    background-color: #009688;
+    color:#fff!important;
+}
+.navbar-default .navbar-brand {
+    color: rgb(2,178,181);
+    font-size: 2.6em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 0.8em 0.3em 0;
+    line-height: 1em;
+    height: 80px;
+    float: left;
+}
+@media (max-width: 480px){
+.navbar-default .navbar-brand {
+    font-size: 1.6em;
+    padding: 0.5em 0 0;
+}
+}@media (min-width: 1024px){
+.navbar-default .navbar-brand {
+    font-size: 2.2em;
+    
+}}.navbar-inverse .navbar-brand {
+    color: white;
+}.navbar-inverse .navbar-nav>li>a {
+    color: white;
+}
 @media (min-width: 768px){
 .navbar-nav {
     float: left!important;

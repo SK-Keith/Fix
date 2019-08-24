@@ -15,8 +15,8 @@ public class VerifyCode {
 	private int w = 70;
 	private int h = 35;
  	private Random r = new Random();
- 	// {"å®‹ä½“", "åæ–‡æ¥·ä½“", "é»‘ä½“", "åæ–‡æ–°é­", "åæ–‡éš¶ä¹¦", "å¾®è½¯é›…é»‘", "æ¥·ä½“_GB2312"}
-	private String[] fontNames  = {"å®‹ä½“", "åæ–‡æ¥·ä½“", "é»‘ä½“", "å¾®è½¯é›…é»‘", "æ¥·ä½“_GB2312"};
+ 	// {"ËÎÌå", "»ªÎÄ¿¬Ìå", "ºÚÌå", "»ªÎÄĞÂÎº", "»ªÎÄÁ¥Êé", "Î¢ÈíÑÅºÚ", "¿¬Ìå_GB2312"}
+	private String[] fontNames  = {"ËÎÌå", "»ªÎÄ¿¬Ìå", "ºÚÌå", "Î¢ÈíÑÅºÚ", "¿¬Ìå_GB2312"};
 	private String codes  = "23456789abcdefghjkmnopqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ";
 	private Color bgColor  = new Color(255, 255, 255);
 	private String text ;
@@ -67,7 +67,7 @@ public class VerifyCode {
 		BufferedImage image = createImage(); 
 		Graphics2D g2 = (Graphics2D)image.getGraphics();
 		StringBuilder sb = new StringBuilder();
-		// å‘å›¾ç‰‡ä¸­ç”»4ä¸ªå­—ç¬¦
+		// ÏòÍ¼Æ¬ÖĞ»­4¸ö×Ö·û
 		for(int i = 0; i < 4; i++)  {
 			String s = randomChar() + ""; 
 			sb.append(s); 

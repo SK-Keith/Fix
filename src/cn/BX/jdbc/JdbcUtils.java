@@ -8,86 +8,85 @@ import javax.sql.DataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class JdbcUtils {
-	// é¥¿æ±‰å¼
-		private static DataSource ds = new ComboPooledDataSource();
-		
-		/**
-		 * å®ƒä¸ºnullè¡¨ç¤ºæ²¡æœ‰äº‹åŠ¡
-		 * å®ƒä¸ä¸ºnullè¡¨ç¤ºæœ‰äº‹åŠ¡
-		 * å½“å¼€å¯äº‹åŠ¡æ—¶ï¼Œéœ€è¦ç»™å®ƒèµ‹å€¼
-		 * å½“ç»“æŸäº‹åŠ¡æ—¶ï¼Œéœ€è¦ç»™å®ƒèµ‹å€¼ä¸ºnull
-		 * å¹¶ä¸”åœ¨å¼€å¯äº‹åŠ¡æ—¶ï¼Œè®©daoçš„å¤šä¸ªæ–¹æ³•å…±äº«è¿™ä¸ªConnection
-		 */
-		private static ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
-		
-		public static DataSource getDataSource() {
-			return ds;
-		}
-		
-		/**
-		 * daoä½¿ç”¨æœ¬æ–¹æ³•æ¥è·å–è¿æ¥
-		 * @return
-		 * @throws SQLException
-		 */
-		public static Connection getConnection() throws SQLException {
-			/*
-			 * å¦‚æœæœ‰äº‹åŠ¡ï¼Œè¿”å›å½“å‰äº‹åŠ¡çš„con
-			 * å¦‚æœæ²¡æœ‰äº‹åŠ¡ï¼Œé€šè¿‡è¿æ¥æ± è¿”å›æ–°çš„con
+	// ¶öººÊ½
+			private static DataSource ds = new ComboPooledDataSource();
+			
+			/**
+			 * ËüÎªnull±íÊ¾Ã»ÓĞÊÂÎñ
+			 * Ëü²»Îªnull±íÊ¾ÓĞÊÂÎñ
+			 * µ±¿ªÆôÊÂÎñÊ±£¬ĞèÒª¸øËü¸³Öµ
+			 * µ±½áÊøÊÂÎñÊ±£¬ĞèÒª¸øËü¸³ÖµÎªnull
+			 * ²¢ÇÒÔÚ¿ªÆôÊÂÎñÊ±£¬ÈÃdaoµÄ¶à¸ö·½·¨¹²ÏíÕâ¸öConnection
 			 */
-			Connection con = tl.get();//è·å–å½“å‰çº¿ç¨‹çš„äº‹åŠ¡è¿æ¥
-			if(con != null) return con;
-			return ds.getConnection();
-		}
-		
-		/**
-		 * å¼€å¯äº‹åŠ¡
-		 * @throws SQLException 
-		 */
-		public static void beginTransaction() throws SQLException {
-			Connection con = tl.get();//è·å–å½“å‰çº¿ç¨‹çš„äº‹åŠ¡è¿æ¥
-			if(con != null) throw new SQLException("å·²ç»å¼€å¯äº†äº‹åŠ¡ï¼Œä¸èƒ½é‡å¤å¼€å¯ï¼");
-			con = ds.getConnection();//ç»™conèµ‹å€¼ï¼Œè¡¨ç¤ºå¼€å¯äº†äº‹åŠ¡
-			con.setAutoCommit(false);//è®¾ç½®ä¸ºæ‰‹åŠ¨æäº¤
-			tl.set(con);//æŠŠå½“å‰äº‹åŠ¡è¿æ¥æ”¾åˆ°tlä¸­
-		}
-		
-		/**
-		 * æäº¤äº‹åŠ¡
-		 * @throws SQLException 
-		 */
-		public static void commitTransaction() throws SQLException {
-			Connection con = tl.get();//è·å–å½“å‰çº¿ç¨‹çš„äº‹åŠ¡è¿æ¥
-			if(con == null) throw new SQLException("æ²¡æœ‰äº‹åŠ¡ä¸èƒ½æäº¤ï¼");
-			con.commit();//æäº¤äº‹åŠ¡
-			con.close();//å…³é—­è¿æ¥
-			con = null;//è¡¨ç¤ºäº‹åŠ¡ç»“æŸï¼
-			tl.remove();
-		}
-		
-		/**
-		 * å›æ»šäº‹åŠ¡
-		 * @throws SQLException 
-		 */
-		public static void rollbackTransaction() throws SQLException {
-			Connection con = tl.get();//è·å–å½“å‰çº¿ç¨‹çš„äº‹åŠ¡è¿æ¥
-			if(con == null) throw new SQLException("æ²¡æœ‰äº‹åŠ¡ä¸èƒ½å›æ»šï¼");
-			con.rollback();
-			con.close();
-			con = null;
-			tl.remove();
-		}
-		
-		/**
-		 * é‡Šæ”¾Connection
-		 * @param con
-		 * @throws SQLException 
-		 */
-		public static void releaseConnection(Connection connection) throws SQLException {
-			Connection con = tl.get();//è·å–å½“å‰çº¿ç¨‹çš„äº‹åŠ¡è¿æ¥
-			if(connection != con) {//å¦‚æœå‚æ•°è¿æ¥ï¼Œä¸å½“å‰äº‹åŠ¡è¿æ¥ä¸åŒï¼Œè¯´æ˜è¿™ä¸ªè¿æ¥ä¸æ˜¯å½“å‰äº‹åŠ¡ï¼Œå¯ä»¥å…³é—­ï¼
-				if(connection != null &&!connection.isClosed()) {//å¦‚æœå‚æ•°è¿æ¥æ²¡æœ‰å…³é—­ï¼Œå…³é—­ä¹‹ï¼
-					connection.close();
+			private static ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
+			
+			public static DataSource getDataSource() {
+				return ds;
+			}
+			
+			/**
+			 * daoÊ¹ÓÃ±¾·½·¨À´»ñÈ¡Á¬½Ó
+			 * @return
+			 * @throws SQLException
+			 */
+			public static Connection getConnection() throws SQLException {
+				/*
+				 * Èç¹ûÓĞÊÂÎñ£¬·µ»Øµ±Ç°ÊÂÎñµÄcon
+				 * Èç¹ûÃ»ÓĞÊÂÎñ£¬Í¨¹ıÁ¬½Ó³Ø·µ»ØĞÂµÄcon
+				 */
+				Connection con = tl.get();//»ñÈ¡µ±Ç°Ïß³ÌµÄÊÂÎñÁ¬½Ó
+				if(con != null) return con;
+				return ds.getConnection();
+			}
+			
+			/**
+			 * ¿ªÆôÊÂÎñ
+			 * @throws SQLException 
+			 */
+			public static void beginTransaction() throws SQLException {
+				Connection con = tl.get();//»ñÈ¡µ±Ç°Ïß³ÌµÄÊÂÎñÁ¬½Ó
+				if(con != null) throw new SQLException("ÒÑ¾­¿ªÆôÁËÊÂÎñ£¬²»ÄÜÖØ¸´¿ªÆô£¡");
+				con = ds.getConnection();//¸øcon¸³Öµ£¬±íÊ¾¿ªÆôÁËÊÂÎñ
+				con.setAutoCommit(false);//ÉèÖÃÎªÊÖ¶¯Ìá½»
+				tl.set(con);//°Ñµ±Ç°ÊÂÎñÁ¬½Ó·Åµ½tlÖĞ
+			}
+			
+			/**
+			 * Ìá½»ÊÂÎñ
+			 * @throws SQLException 
+			 */
+			public static void commitTransaction() throws SQLException {
+				Connection con = tl.get();//»ñÈ¡µ±Ç°Ïß³ÌµÄÊÂÎñÁ¬½Ó
+				if(con == null) throw new SQLException("Ã»ÓĞÊÂÎñ²»ÄÜÌá½»£¡");
+				con.commit();//Ìá½»ÊÂÎñ
+				con.close();//¹Ø±ÕÁ¬½Ó
+				con = null;//±íÊ¾ÊÂÎñ½áÊø£¡
+				tl.remove();
+			}
+			
+			/**
+			 * »Ø¹öÊÂÎñ
+			 * @throws SQLException 
+			 */
+			public static void rollbackTransaction() throws SQLException {
+				Connection con = tl.get();//»ñÈ¡µ±Ç°Ïß³ÌµÄÊÂÎñÁ¬½Ó
+				if(con == null) throw new SQLException("Ã»ÓĞÊÂÎñ²»ÄÜ»Ø¹ö£¡");
+				con.rollback();
+				con.close();
+				con = null;
+				tl.remove();
+			}
+			
+			/**
+			 * ÊÍ·ÅConnection
+			 * @throws SQLException
+			 */
+			public static void releaseConnection(Connection connection) throws SQLException {
+				Connection con = tl.get();//»ñÈ¡µ±Ç°Ïß³ÌµÄÊÂÎñÁ¬½Ó
+				if(connection != con) {//Èç¹û²ÎÊıÁ¬½Ó£¬Óëµ±Ç°ÊÂÎñÁ¬½Ó²»Í¬£¬ËµÃ÷Õâ¸öÁ¬½Ó²»ÊÇµ±Ç°ÊÂÎñ£¬¿ÉÒÔ¹Ø±Õ£¡
+					if(connection != null &&!connection.isClosed()) {//Èç¹û²ÎÊıÁ¬½ÓÃ»ÓĞ¹Ø±Õ£¬¹Ø±ÕÖ®£¡
+						connection.close();
+					}
 				}
 			}
-		}
 }
